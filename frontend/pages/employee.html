@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理 - HR系统</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .header { background: white; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .back { color: #1890ff; cursor: pointer; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .toolbar { background: white; padding: 15px; margin-bottom: 20px; border-radius: 4px; display: flex; gap: 10px; }
+        .actions button { margin-right: 5px; padding: 4px 8px; font-size: 12px; }
+        .pagination { margin-top: 20px; text-align: center; }
+        .pagination button { margin: 0 5px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 8px; width: 500px; }
+        .form-item { margin: 15px 0; }
+        .form-item label { display: block; margin-bottom: 5px; color: #333; }
+        .form-item input, .form-item select { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="back" onclick="navigate('index.html')">← 返回首页</span>
+    </div>
+    <div class="container">
+        <div class="toolbar">
+            <input type="text" id="keyword" placeholder="搜索姓名或工号">
+            <button class="btn-primary" onclick="loadData()">搜索</button>
+            <button class="btn-primary" onclick="showModal()">添加员工</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>工号</th>
+                    <th>姓名</th>
+                    <th>部门</th>
+                    <th>职位</th>
+                    <th>入职日期</th>
+                    <th>电话</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <div class="pagination">
+            <button onclick="prevPage()">上一页</button>
+            <span id="pageInfo"></span>
+            <button onclick="nextPage()">下一页</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">添加员工</h3>
+            <div class="form-item">
+                <label>工号</label>
+                <input type="text" id="employeeNo">
+            </div>
+            <div class="form-item">
+                <label>姓名</label>
+                <input type="text" id="name">
+            </div>
+            <div class="form-item">
+                <label>部门</label>
+                <select id="departmentId"></select>
+            </div>
+            <div class="form-item">
+                <label>职位</label>
+                <input type="text" id="position">
+            </div>
+            <div class="form-item">
+                <label>入职日期</label>
+                <input type="date" id="hireDate">
+            </div>
+            <div class="form-item">
+                <label>电话</label>
+                <input type="text" id="phone">
+            </div>
+            <button class="btn-primary" onclick="save()">保存</button>
+            <button onclick="hideModal()" style="background: #ccc; margin-left: 10px;">取消</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/employee.js"></script>
+</body>
+</html>
